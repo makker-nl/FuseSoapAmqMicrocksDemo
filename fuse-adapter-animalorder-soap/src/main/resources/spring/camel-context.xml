@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <import resource="classpath:spring/camel-cxf.xml"/>
+    <import resource="classpath:spring/camel-beans.xml"/>
+    <import resource="classpath:spring/camel-amqp.xml"/>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <route id="receiveAnimalOrderServiceSOAPRoute">
+            <from id="receiveAnimalOrder" uri="cxf:bean:animalOrderSOAPEndpoint"/>
+            <log id="logIncomingMsg" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="AnimalOrder Request message received: \n ${body}"/>
+            <log id="logRemoteURI" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="Try to connect to amqp server using connection {{amqp.remoteURI}}.\nSend message to {{amqp.service.address}}."/>
+            <to id="toAMQEndpoint" pattern="InOnly" uri="amqp:{{amqp.service.address}}"/>
+            <log id="logOutput" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="AnimalOrder request message sent to AMQPS endpoint: \n${body}"/>
+            <to id="toAnimalOrderRequest2Response" uri="xslt:transformations/AnimalOrderRequestToAnimalOrderResponse.xsl?output=DOM"/>
+            <log id="logOutgoingMsg" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="AnimalOrder Response message responded: \n ${body}"/>
+        </route>
+    </camelContext>
+</beans>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring.xsd">
+	
+	
+	<!-- Configures a JMS client acknowledgement that is triggered when the Camel route is succesfully completed. 
+		 In case of acknowledgement the message is deleted from the source queue.
+		 However, if no acknowledgement is given then the message will remain on the source queue. 
+		 This mechanism ensures that data remains on the source queue until correctly processed by the application.
+		 Can be used in combination with error handlers. Please note that succesful error handling is 
+		 considered a form of succesfull route completion and results in an acknowledgement -->
+	<bean id="jmsClientAcknowledge" class="nl.vs.fuse.demo.jms.JmsClientAcknowledge"/>
+ 
+	<!--  Error handler that consists out of a redelivery mechanism, and in case of repeated failure of delivery, a dead letter address.
+	      This error handler can be considered as a "default error handler" for JMS connections. Can be used in combination with prepareAcknowledge bean
+		  A custom error handler that extends the one below can be implemented by setting the deadLetterUri to a route address,
+		  as in 'direct:errorHandlerRoute', instead of a DLQ address on a message broker -->
+    <bean id="jmsRetryAndDeadLetterChannelBuilder" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+    	<property name="deadLetterUri" value="${amqp.errorHandler.deadletteraddress:amqp:queue:DLQ}"/>
+    	<property name="redeliveryPolicy" ref="${amqp.errorHandler.redeliveryPolicy:jmsDefaultRedeliveryPolicy}"/>
+    	<property name="useOriginalMessage" value="${amqp.errorHandler.useOriginalMessage:TRUE}"/>
+    </bean>
+
+	<bean id="jmsDefaultRedeliveryPolicy" class="org.apache.camel.processor.RedeliveryPolicy">
+	    <!-- try a specified number of retries, after that the exchange is dead and its routed to the deadletter queue configured above -->
+        <property name="maximumRedeliveries" value="${amqp.errorHandler.maximumRedeliveries:3}"/>
+		<!-- delay in ms before redelivery -->
+		<property name="redeliveryDelay" value="${amqp.errorHandler.redeliveryDelay:500}"/>
+		<property name="retryAttemptedLogLevel" value="${amqp.errorHandler.retryAttemptedLogLevel:WARN}"/>
+		<property name="useExponentialBackOff" value="${amqp.errorHandler.useExponentialBackOff:TRUE}"/>
+		<property name="logStackTrace" value="${amqp.errorHandler.logStackTrace:TRUE}"/>
+    </bean> 
+
+	<!-- This policy implements a circuit breaker pattern in which message consumption is terminated upon a preconfigured number of failed message transactions --> 
+	<bean id="jmsThrottlingExceptionRoutePolicy" class="org.apache.camel.impl.ThrottlingExceptionRoutePolicy">
+		<constructor-arg value="${amqp.throttlingException.failureTreshold:10}" 		index="0" 	type="int" />
+		<constructor-arg value="${amqp.throttlingException.failureWindow:10000}" 	index="1" 	type="long" />
+		<constructor-arg value="${amqp.throttlingException.halfOpenAfter:10000}" 	index="2" 	type="long" />
+		<!-- constructor-arg index 3 is for a list of error classes that trigger the throttling mechanism. Default null sets mechanism for all error types -->
+		<constructor-arg index="3" 	type="List" ><null/></constructor-arg>
+		<constructor-arg value="${amqp.throttlingException.keepOpen:false}" 			index="4" 	type="boolean" />
+	</bean>
+
+	<!--  configures a pooled connection factory for AMQP connections. Can be considered as a default connection factory for communication with Red hat Interconnect edge routers -->
+	<bean id="amqp" class="org.apache.camel.component.amqp.AMQPComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>
+	
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="${amqp.jmsConnectionFactory:jmsPooledConnectionFactory}"/>
+		<property name="transacted" value="${amqp.transacted:true}"/>
+		<property name="lazyCreateTransactionManager" value="${amqp.lazyCreateTransactionManager:true}"/>
+		<property name="deliveryPersistent" value="${amqp.deliveryPersistent:true}"/>
+		<property name="requestTimeout" value="${amqp.jmsRequestTimeout:10000}"/>
+		<property name="cacheLevelName" value="${amqp.cacheLevelName:CACHE_AUTO}"/>
+		<property name="acknowledgementModeName" value="${amqp.acknowledgementModeName:AUTO_ACKNOWLEDGE}"/>
+	</bean>
+
+	<bean id="jmsPooledConnectionFactory" class="org.messaginghub.pooled.jms.JmsPoolConnectionFactory" init-method="start" destroy-method="stop">
+		<property name="maxConnections" value="${amqp.jmsMaxConnections:1}"/>
+		<property name="maxSessionsPerConnection" value="${amqp.jmsMaximumActiveSessionPerConnection:10}"/>
+		<property name="useAnonymousProducers" value="${amqp.useAnonymousProducers:false}"/>
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+	</bean>
+
+	<bean id="jmsConnectionFactory" class="org.apache.qpid.jms.JmsConnectionFactory">
+		<property name="remoteURI" value="${amqp.remoteURI}"/>
+		<property name="username" value="${amqp.userName}"/>
+		<property name="password" value="${amqp.password}"/>
+	</bean>
+
+</beans>

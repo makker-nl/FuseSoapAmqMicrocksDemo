@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+	                    http://camel.apache.org/schema/cxf https://camel.apache.org/schema/cxf/camel-cxf.xsd
+	                    http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring.xsd">
+	<cxf:cxfEndpoint
+		xmlns:tns="http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders"
+		id="animalOrderSOAPEndpoint" address="${aoSvc.soap.endpoint}"
+		wsdlURL="wsdl/AnimalOrderService.wsdl"
+		endpointName="tns:order_pttPort" serviceName="tns:order_ptt"
+		serviceClass="nl.vs.fuse.demo.animalorder.webservices.AnimalOrderServiceProvider">
+		<cxf:properties>
+			<entry key="dataFormat" value="PAYLOAD" />
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+</beans>

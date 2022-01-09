@@ -1,0 +1,26 @@
+<anim:animalOrderRequest
+    xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
+    <anim:animalOrder>
+        <anim:customer id="1234">
+            <anim:name>Dierentuin Amersfoort</anim:name>
+            <anim:city>Amersfoort</anim:city>
+            <anim:country>Netherlands</anim:country>
+        </anim:customer>
+        <anim:date>?</anim:date>
+        <anim:orderlines>
+            <!--1 or more repetitions: -->
+            <anim:orderline>
+                <anim:article id="A001">
+                    <anim:description>Lion</anim:description>
+                </anim:article>
+                <anim:quantity>2</anim:quantity>
+            </anim:orderline>
+            <anim:orderline>
+                <anim:article id="A002">
+                    <anim:description>Zebra</anim:description>
+                </anim:article>
+                <anim:quantity>4</anim:quantity>
+            </anim:orderline>
+        </anim:orderlines>
+    </anim:animalOrder>
+</anim:animalOrderRequest>

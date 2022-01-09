@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <bean class="org.apache.camel.util.jsse.SSLContextParameters" id="sslContextParameters">
+        <property name="keyManagers" ref="KeyManagers"/>
+        <property name="trustManagers" ref="TrustManagers"/>
+    </bean>
+    <bean class="org.apache.camel.util.jsse.KeyManagersParameters" id="KeyManagers">
+        <property name="keyStore" ref="KeyStore"/>
+        <property name="keyPassword" value="${keystore.password}"/>
+    </bean>
+    <bean class="org.apache.camel.util.jsse.TrustManagersParameters" id="TrustManagers">
+        <property name="keyStore" ref="TrustStore"/>
+    </bean>
+    <keyStoreParameters id="KeyStore" password="${keystore.password}"
+        resource="${keystore}" xmlns="http://camel.apache.org/schema/spring"/>
+    <keyStoreParameters id="TrustStore"
+        password="${truststore.password}" resource="${truststore}" xmlns="http://camel.apache.org/schema/spring"/>
+</beans>

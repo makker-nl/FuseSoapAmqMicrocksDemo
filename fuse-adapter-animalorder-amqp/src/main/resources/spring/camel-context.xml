@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <import resource="classpath:spring/camel-beans.xml"/>
+    <import resource="classpath:spring/camel-cxf.xml"/>
+    <import resource="classpath:spring/camel-amqp.xml"/>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <route id="receiveAnimalOrderAMQPRoute">
+            <from id="receiveAnimalOrder" uri="amqp:{{amqp.service.address}}"/>
+            <log id="logIncomingMsg" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="AnimalOrder message received: \n ${body}"/>
+            <setHeader headerName="operationName" id="setOperationName">
+                <constant>order</constant>
+            </setHeader>
+            <setHeader headerName="operationNameSpace" id="setOperationNameSpace">
+                <constant>http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders</constant>
+            </setHeader>
+            <setHeader headerName="SOAPAction" id="setSOAPAction">
+                <constant/>
+            </setHeader>
+            <log id="logAnimOrdReqMsg" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="Invoke Remote AnimalOrder service with request message: \n ${body}"/>
+            <to id="invokeAnimalOrderSvc" uri="cxf:bean:animalOrderSOAPEndpoint"/>
+            <log id="logAnimOrdRespMsg" logName="nl.vs.fuse.demo"
+                loggingLevel="DEBUG" message="AnimalOrder Service response message received: \n ${body}"/>
+        </route>
+    </camelContext>
+</beans>

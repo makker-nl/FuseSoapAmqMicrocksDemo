@@ -1,0 +1,10 @@
+<ns0:animalOrderResponse
+    xmlns:ns0="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
+    <ns0:animalOrder>
+        <ns0:customer id="1234">
+            <ns0:name>Dierentuin Amersfoort</ns0:name>
+            <ns0:city>Amersfoort</ns0:city>
+            <ns0:country>Netherlands</ns0:country>
+        </ns0:customer>
+    </ns0:animalOrder>
+</ns0:animalOrderResponse>

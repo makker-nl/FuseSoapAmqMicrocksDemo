@@ -32,7 +32,7 @@ import nl.vs.fuse.demo.test.stub.EmbeddedBrokerService;
 @UseAdviceWith
 public class ReceiveActivityServiceSOAPRouteTest {
 	private static final Logger log = LoggerFactory.getLogger(ReceiveActivityServiceSOAPRouteTest.class);
-	private static final String URI_SEND_ANORD = "direct:sendActivityV1Request";
+	private static final String URI_SEND_ANORD = "direct:sendAnimalOrderRequest";
 	private static final String TEST_FLDR_ANORD = "src/test/resources/animalorder";
 	private static final String TEST_REQ_CREUPD_ANORD = TEST_FLDR_ANORD + "/animalorder-req-1234.xml";
 	private static final String TEST_RESP_CREUPD_ANORD = TEST_FLDR_ANORD + "/animalorder-resp-1234.xml";

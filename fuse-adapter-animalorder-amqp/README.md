@@ -1,6 +1,7 @@
-# AnimalOrder SOAP adapter
+# AnimalOrder AMQP adapter
 
-This example projects exposes a SOAP Service. A received request is posted on an AMQ endpont. This can be an AMQ Artemis Broker address directly or through an Red Hat Interconnect/Apache QPid Router network. 
+This example project listens to an AMQP address. This can be an AMQ Artemis Broker address directly or through an Red Hat Interconnect/Apache QPid Router network. 
+ A received request is posted on to a SOAP endpont, that should be mocked. Goal is to show how to do so with [microcks.io](microcks.io).
 
 The application utilizes the Spring https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/ImportResource.html[`@ImportResource`] annotation to load a Camel Context definition via a _src/main/resources/spring/camel-context.xml_ file on the classpath.
 

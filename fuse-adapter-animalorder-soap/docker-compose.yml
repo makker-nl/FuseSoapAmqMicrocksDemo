@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+
+####  Broker
+  amqp-broker-producer:
+    container_name: artemis_broker_producer
+    image: registry.redhat.io/amq7/amq-broker:7.8
+    ports:
+      # ui
+      - 8161:8161
+      # all protocols
+      - 61616:61616
+      # AMQP
+      - 5672:5672
+    volumes:
+      - ./configuration/broker.xml:/opt/amq/conf/broker.xml
+      - ./configuration:/configuration
+    environment:
+      AMQ_USER: "admin"
+      AMQ_PASSWORD: "admin"
+    networks:
+      - amqp-demo-network
+
+#### Adapter
+  fuse-adapter-animalorder-soap:
+    container_name: fuse_adapter_animalorder_soap
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks:
+      - amqp-demo-network
+    env_file:
+    - ./configuration/dckr_env.properties
+    restart: always
+    # https://linuxhint.com/docker_compose_memory_limits/
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/
+    deploy:
+        resources:
+            limits:
+                cpus: '1.0' 
+                memory: 512m
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes
+    volumes:
+      - type: bind
+        source: ./configuration
+        target: /configuration
+    ports:
+      - "8080:8080"
+
+networks:
+  amqp-demo-network:
+    name: amqp-demo-network
+

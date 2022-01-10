@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="1bd9814d-027b-4511-ad24-816873b81ec5" activeEnvironment="Default" name="AnimalOrderQuoteService" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="f3c44db8-95ea-4a3c-88ab-c9edf7562151" wsaVersion="NONE" name="order_pttSOAP11Binding" type="wsdl" bindingName="{http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders}order_pttSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="file:/home/redhat/git/VS/redhat-fuse/application-development/soaptosoap/src/main/resources/WSDLs/AnimalOrderService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/redhat/git/VS/redhat-fuse/application-development/soaptosoap/src/main/resources/WSDLs/AnimalOrderService.wsdl"><con:part><con:url>file:/home/redhat/git/VS/redhat-fuse/application-development/soaptosoap/src/main/resources/WSDLs/AnimalOrderService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="AnimalOrderService" targetNamespace="http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders" xmlns:tns="http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders" xmlns:inp1="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<con:soapui-project id="1bd9814d-027b-4511-ad24-816873b81ec5" activeEnvironment="Default" name="AnimalOrderQuoteService" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:description>AnimalOrder Service Mock project for Microcks</con:description><con:settings/><con:interface xsi:type="con:WsdlInterface" id="f3c44db8-95ea-4a3c-88ab-c9edf7562151" wsaVersion="NONE" name="AnimalOrder_pttSOAP11Binding" type="wsdl" bindingName="{http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders}order_pttSOAP11Binding" soapVersion="1_1" anonymous="optional" definition="file:/home/redhat/git/VS/redhat-fuse/application-development/soaptosoap/src/main/resources/WSDLs/AnimalOrderService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/redhat/git/VS/redhat-fuse/application-development/soaptosoap/src/main/resources/WSDLs/AnimalOrderService.wsdl"><con:part><con:url>file:/home/redhat/git/VS/redhat-fuse/application-development/soaptosoap/src/main/resources/WSDLs/AnimalOrderService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="AnimalOrderService" targetNamespace="http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders" xmlns:tns="http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders" xmlns:inp1="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <xsd:import namespace="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders" schemaLocation="../Schemas/AnimalOrders.xsd"/>
@@ -83,30 +83,30 @@
     </xsd:sequence>
     <xsd:attribute name="id" type="xsd:string"/>
   </xsd:complexType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://192.168.1.35:8080/FuseDemos/AnimalOrderService</con:endpoint><con:endpoint>http://localhost:8080/services/publisher/AnimalOrderService</con:endpoint><con:endpoint>http://www.example.com</con:endpoint></con:endpoints><con:operation id="4357e1e1-d24a-4475-97b7-ee15c6c8b62f" isOneWay="false" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order" name="order" bindingOperationName="order" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8f52f808-638d-4691-be30-65c3283f45e7" name="AnimalOrder Request"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/publisher/AnimalOrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://rhfuse.conclusion.local:8089/AnimalOrderMock</con:endpoint><con:endpoint>https://localhost:8080/services/publisher/AnimalOrderService</con:endpoint><con:endpoint>https://localhost:8085/services/publisher/AnimalOrderService</con:endpoint></con:endpoints><con:operation id="4357e1e1-d24a-4475-97b7-ee15c6c8b62f" isOneWay="false" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order" name="order" bindingOperationName="order" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8f52f808-638d-4691-be30-65c3283f45e7" name="AnimalOrder5678 Request"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:8085/services/publisher/AnimalOrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Header/>
    <soapenv:Body>
       <anim:animalOrderRequest xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
          <anim:animalOrder>
-            <anim:customer id="1234">
-               <anim:name>Dierentuin Amersfoort</anim:name>
-               <anim:city>Amersfoort</anim:city>
+            <anim:customer id="5678">
+               <anim:name>Burgers Zoo</anim:name>
+               <anim:city>Arnhem</anim:city>
                <anim:country>Netherlands</anim:country>
             </anim:customer>
             <anim:date>?</anim:date>
             <anim:orderlines>
                <!--1 or more repetitions:-->
                <anim:orderline>
-                  <anim:article id="A001">
-                     <anim:description>Lion</anim:description>
+                  <anim:article id="A003">
+                     <anim:description>Giraffe</anim:description>
                   </anim:article>
-                  <anim:quantity>2</anim:quantity>
+                  <anim:quantity>3</anim:quantity>
                </anim:orderline>
                <anim:orderline>
-                  <anim:article id="A002">
-                     <anim:description>Zebra</anim:description>
+                  <anim:article id="A004">
+                     <anim:description>Rinosaurus</anim:description>
                   </anim:article>
-                  <anim:quantity>4</anim:quantity>
+                  <anim:quantity>2</anim:quantity>
                </anim:orderline>
             </anim:orderlines>
          </anim:animalOrder>
@@ -210,7 +210,7 @@
          <anim:quantity>3</anim:quantity>
       </anim:animalQuoteRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.vs.nl/fuse/demo/wsdl/animalquoteservice/quote"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="c77e148b-7d0d-434e-b9d5-3e595773c3d8" name="AnimalOrder TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ade02af9-fb58-4f1e-b799-87f81a2da900" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AnimalOrder - OK" searchProperties="true"><con:settings/><con:testStep type="request" id="4cd343b3-cc9d-409c-930c-db2d0cea9059" name="order - AnimalOrder Request"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>order_pttSOAP11Binding</con:interface><con:operation>order</con:operation><con:request name="order - AnimalOrder Request" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="1ddca423-a0d4-4914-8701-e9bc3b62894a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/publisher/AnimalOrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.vs.nl/fuse/demo/wsdl/animalquoteservice/quote"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="c77e148b-7d0d-434e-b9d5-3e595773c3d8" name="AnimalOrder TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ade02af9-fb58-4f1e-b799-87f81a2da900" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="order" searchProperties="true"><con:settings/><con:testStep type="request" id="4cd343b3-cc9d-409c-930c-db2d0cea9059" name="Customer1234 Request"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AnimalOrder_pttSOAP11Binding</con:interface><con:operation>order</con:operation><con:request name="Customer1234 Request" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="1ddca423-a0d4-4914-8701-e9bc3b62894a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://rhfuse.conclusion.local:8089/AnimalOrderMock</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Header/>
    <soapenv:Body>
       <anim:animalOrderRequest xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
@@ -239,40 +239,42 @@
          </anim:animalOrder>
       </anim:animalOrderRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="70753f6d-8328-4ca3-8f52-6e41746021b8" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="mockresponse" name="quote A001" id="84e8275b-9730-4ed1-8ee4-0a0003b30145"><con:settings/><con:config xsi:type="con:MockResponseStep" startStep="order - AnimalOrder Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AnimalQuote_pttSOAP11Binding</con:interface><con:operation>quote</con:operation><con:path>/fuse/demo/mockAnimalQuote</con:path><con:port>8089</con:port><con:response name="Response A001" id="c74c2457-86e7-44db-abbf-be9e27dee9b8" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes">
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="70753f6d-8328-4ca3-8f52-6e41746021b8" name="SOAP Response"/><con:assertion type="XPath Match" id="578cf3bb-3ff1-4fa3-8986-3fa54b985775" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders';
+declare namespace ns2='http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders';
+//ns2:animalOrderResponse/ns2:animalOrder/ns2:customer/@id</path><content>1234</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="478f8447-852e-488a-9b58-7e39a5644358" name="Customer5678 Request"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AnimalOrder_pttSOAP11Binding</con:interface><con:operation>order</con:operation><con:request name="Customer5678 Request" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="1ddca423-a0d4-4914-8701-e9bc3b62894a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:8085/services/publisher/AnimalOrderService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Header/>
    <soapenv:Body>
-      <anim:animalQuoteResponse>
-         <anim:animalQuote>
-            <anim:animal>
-               <anim:id>A001</anim:id>
-               <anim:name>Chimpansee</anim:name>
-               <anim:countryOfOrigin>Netherlands</anim:countryOfOrigin>
-            </anim:animal>
-            <anim:price>300.00</anim:price>
-            <anim:quantityInStock>5</anim:quantityInStock>
-         </anim:animalQuote>
-         <anim:result>OK</anim:result>
-         
-      </anim:animalQuoteResponse>
+      <anim:animalOrderRequest xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
+         <anim:animalOrder>
+            <anim:customer id="5678">
+               <anim:name>Burgers Zoo</anim:name>
+               <anim:city>Arnhem</anim:city>
+               <anim:country>Netherlands</anim:country>
+            </anim:customer>
+            <anim:date>?</anim:date>
+            <anim:orderlines>
+               <!--1 or more repetitions:-->
+               <anim:orderline>
+                  <anim:article id="A003">
+                     <anim:description>Giraffe</anim:description>
+                  </anim:article>
+                  <anim:quantity>3</anim:quantity>
+               </anim:orderline>
+               <anim:orderline>
+                  <anim:article id="A004">
+                     <anim:description>Rinosaurus</anim:description>
+                  </anim:article>
+                  <anim:quantity>2</anim:quantity>
+               </anim:orderline>
+            </anim:orderlines>
+         </anim:animalOrder>
+      </anim:animalOrderRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.vs.nl/fuse/demo/wsdl/animalquoteservice/quote"/></con:response></con:config></con:testStep><con:testStep type="mockresponse" name="quote A002" id="5a4390f7-e949-4827-95f6-67272aeb77a8"><con:settings/><con:config xsi:type="con:MockResponseStep" startStep="order - AnimalOrder Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>AnimalQuote_pttSOAP11Binding</con:interface><con:operation>quote</con:operation><con:path>/fuse/demo/mockAnimalQuote</con:path><con:port>8089</con:port><con:response name="Response A002" id="92151b4f-06a3-4025-bd17-5d19f795278a" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <anim:animalQuoteResponse>
-         <anim:animalQuote>
-            <anim:animal>
-               <anim:id>A002</anim:id>
-               <anim:name>Zebra</anim:name>
-               <anim:countryOfOrigin>South Africa</anim:countryOfOrigin>
-            </anim:animal>
-            <anim:price>450</anim:price>
-            <anim:quantityInStock>2</anim:quantityInStock>
-         </anim:animalQuote>
-         <anim:result>OK</anim:result>
-      </anim:animalQuoteResponse>
-   </soapenv:Body>
-</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.vs.nl/fuse/demo/wsdl/animalquoteservice/quote"/></con:response></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService id="ffb87c41-f506-4e6a-85f9-09090c16859a" port="8089" path="/fuse/demo/mockAnimalQuote" host="localhost" name="AnimalQuote_pttSOAP11Binding MockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="quote" id="319eb6a6-1088-4267-b447-204eb0c9b5e8" interface="AnimalQuote_pttSOAP11Binding" operation="quote"><con:settings/><con:defaultResponse>Response NotFound</con:defaultResponse><con:dispatchStyle>QUERY_MATCH</con:dispatchStyle><con:response name="Response A001" id="c74c2457-86e7-44db-abbf-be9e27dee9b8" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes">
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="70753f6d-8328-4ca3-8f52-6e41746021b8" name="SOAP Response"/><con:assertion type="XPath Match" id="34fa3967-4581-4155-a49d-dcedf48d01f8" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders';
+declare namespace ns2='http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders';
+//ns2:animalOrderResponse/ns2:animalOrder/ns2:customer/@id</path><content>1234</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService id="ffb87c41-f506-4e6a-85f9-09090c16859a" port="8089" path="/fuse/demo/mockAnimalQuote" host="localhost" name="AnimalQuote_pttSOAP11Binding MockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="quote" id="319eb6a6-1088-4267-b447-204eb0c9b5e8" interface="AnimalQuote_pttSOAP11Binding" operation="quote"><con:settings/><con:defaultResponse>Response NotFound</con:defaultResponse><con:dispatchStyle>QUERY_MATCH</con:dispatchStyle><con:response name="Response A001" id="c74c2457-86e7-44db-abbf-be9e27dee9b8" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes">
    <soapenv:Header/>
    <soapenv:Body>
       <anim:animalQuoteResponse>
@@ -333,4 +335,41 @@
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://xmlns.vs.nl/fuse/demo/wsdl/animalquoteservice/quote"/></con:response><con:dispatchConfig xsi:type="con:MockOperationQueryMatchDispatch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:query><con:name>A001</con:name><con:query>declare namespace anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes";
 //anim:animalQuoteRequest/anim:animalId</con:query><con:match>A001</con:match><con:response>Response A001</con:response></con:query><con:query><con:name>G001</con:name><con:query>declare namespace anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes";
 //anim:animalQuoteRequest/anim:animalId</con:query><con:match>G001</con:match><con:response>Response G001</con:response></con:query><con:query><con:name>A002</con:name><con:query>declare namespace anim="http://xmlns.vs.nl/fuse/demo/xsd/animalquotes";
-//anim:animalQuoteRequest/anim:animalId</con:query><con:match>A002</con:match><con:response>Response A002</con:response></con:query></con:dispatchConfig></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+//anim:animalQuoteRequest/anim:animalId</con:query><con:match>A002</con:match><con:response>Response A002</con:response></con:query></con:dispatchConfig></con:mockOperation></con:mockService><con:mockService id="dc875afe-2b55-4060-8c49-0d20d2e74307" port="8089" path="/AnimalOrderMock" host="rhfuse.conclusion.local" name="AnimalOrder Mock" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties><con:property><con:name>Version</con:name><con:value>1.0.0</con:value></con:property></con:properties><con:mockOperation name="order" id="a77d0666-c8b9-4734-bb61-2025c17705a0" interface="AnimalOrder_pttSOAP11Binding" operation="order"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>import com.eviware.soapui.support.XmlHolder
+// Create the XmlHolder object for the login request 
+def holder = new XmlHolder( mockRequest.requestContent )
+// Change the value of the password node
+holder.declareNamespace("soap","http://schemas.xmlsoap.org/soap/envelope/");
+holder.declareNamespace("ns1","http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders");
+holder.declareNamespace("ns2","http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders");
+
+def customerIdStr = holder["//ns2:animalOrderRequest/ns2:animalOrder/ns2:customer/@id"]
+def customerId = customerIdStr.trim()
+log.info("Customer Id: "+customerIdStr)
+def responseMessage = "Customer"+customerId+" Response"
+log.info("Response message: ["+responseMessage+"]")
+return responseMessage</con:dispatchPath><con:response name="Customer1234 Response" id="e371a6d7-e711-4937-8d7b-fececdadaa0b" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns0:animalOrderResponse xmlns:ns0="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
+         <ns0:animalOrder>
+            <ns0:customer id="1234">
+               <ns0:name>Dierentuin Amersfoort</ns0:name>
+               <ns0:city>Amersfoort</ns0:city>
+               <ns0:country>Netherlands</ns0:country>
+            </ns0:customer>
+         </ns0:animalOrder>
+      </ns0:animalOrderResponse>
+   </soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order"/></con:response><con:response name="Customer5678 Response" id="e371a6d7-e711-4937-8d7b-fececdadaa0b" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns0:animalOrderResponse xmlns:ns0="http://xmlns.vs.nl/fuse/demo/xsd/AnimalOrders">
+         <ns0:animalOrder>
+            <ns0:customer id="5678">
+               <ns0:name>Burgers Zoo</ns0:name>
+               <ns0:city>Arnhem</ns0:city>
+               <ns0:country>Netherlands</ns0:country>
+            </ns0:customer>
+         </ns0:animalOrder>
+      </ns0:animalOrderResponse>
+   </soap:Body>
+</soap:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://oracle.com/sca/soapservice/SOAPArtefacts/SOAPArtefacts/AnimalOrderService/order"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties><con:property><con:name>Version</con:name><con:value>1.0.0</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

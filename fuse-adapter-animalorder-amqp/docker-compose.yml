@@ -1,0 +1,132 @@
+version: "3.8"
+services:
+
+####  Broker
+  amqp-broker-producer:
+    container_name: artemis_broker_producer
+    image: registry.redhat.io/amq7/amq-broker:7.8
+    ports:
+      # ui
+      - 8161:8161
+      # all protocols
+      - 61616:61616
+      # AMQP
+      - 5672:5672
+    volumes:
+      - ./configuration/broker.xml:/opt/amq/conf/broker.xml
+      - ./configuration:/configuration
+    environment:
+      AMQ_USER: "admin"
+      AMQ_PASSWORD: "admin"
+    networks:
+      - amqp-demo-network
+
+#### Adapter fuse-adapter-animalorder-soap:
+  fuse-adapter-animalorder-soap:
+    container_name: fuse_adapter_animalorder_soap
+    build:
+      context: ../fuse-adapter-animalorder-soap/
+      dockerfile: Dockerfile
+    networks:
+      - amqp-demo-network
+    env_file:
+    - ./configuration/dckr_env.properties
+    restart: always
+    # https://linuxhint.com/docker_compose_memory_limits/
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/
+    deploy:
+        resources:
+            limits:
+                cpus: '1.0' 
+                memory: 512m
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes
+    volumes:
+      - type: bind
+        source: ./configuration
+        target: /configuration
+    ports:
+      - "8085:8080"
+
+#### Adapter fuse-adapter-animalorder-amqp:
+  max-adapter-activity-max:
+    container_name: fuse_adapter_animalorder_amqp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - amqp-demo-network
+    env_file:
+    - ./configuration/dckr_env.properties
+    restart: always
+    # https://linuxhint.com/docker_compose_memory_limits/
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/
+    deploy:
+        resources:
+            limits:
+                cpus: '1.0' 
+                memory: 512m
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes
+    volumes:
+      - type: bind
+        source: ./configuration
+        target: /configuration
+    #ports:
+    #  - "8080:8080"
+####
+#### Microcs
+#### From https://github.com/microcks/microcks/blob/master/install/
+  mongo:
+    image: mongo:3.4.23
+    container_name: microcks-db
+    networks:
+      - amqp-demo-network
+    volumes:
+      - "./microcks-data:/data/db"
+
+  keycloak:
+    image: jboss/keycloak:14.0.0
+    container_name: microcks-sso
+    ports:
+      - "18080:8080"
+    networks:
+      - amqp-demo-network
+    environment:
+      KEYCLOAK_USER: "admin"
+      KEYCLOAK_PASSWORD: "admin"
+      KEYCLOAK_IMPORT: "/tmp/microcks-realm.json"
+      KEYCLOAK_FRONTEND_URL: "http://localhost:18080/auth"
+    volumes: 
+      - "./keycloak-realm/microcks-realm-sample.json:/tmp/microcks-realm.json"
+
+  postman:
+    image: quay.io/microcks/microcks-postman-runtime:latest
+    container_name: microcks-postman-runtime
+    networks:
+      - amqp-demo-network
+
+  microcks:
+    depends_on:
+      - mongo
+      - keycloak
+      - postman
+    image: quay.io/microcks/microcks:latest
+    container_name: microcks
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    networks:
+      - amqp-demo-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017
+      - SPRING_DATA_MONGODB_DATABASE=microcks
+      - POSTMAN_RUNNER_URL=http://postman:3000
+      - TEST_CALLBACK_URL=http://microcks:8080
+      - SERVICES_UPDATE_INTERVAL=0 0 0/2 * * *
+      - KEYCLOAK_URL=http://keycloak:8080/auth
+      - KEYCLOAK_PUBLIC_URL=http://localhost:18080/auth
+
+networks:
+  amqp-demo-network:
+    name: amqp-demo-network
+

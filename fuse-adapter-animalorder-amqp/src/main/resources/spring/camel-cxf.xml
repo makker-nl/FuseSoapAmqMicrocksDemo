@@ -7,7 +7,7 @@
 	                    http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring.xsd">
 	<cxf:cxfEndpoint
 		xmlns:tns="http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders"
-		id="animalOrderSOAPEndpoint" address="${aoSvc.soap.endpoint}"
+		id="animalOrderSOAPEndpoint" address="${aoSvc.remote.soap.endpoint}"
 		wsdlURL="wsdl/AnimalOrderService.wsdl"
 		endpointName="tns:order_pttPort" serviceName="tns:order_ptt"
 		serviceClass="nl.vs.fuse.demo.animalorder.webservices.AnimalOrderServiceProvider">

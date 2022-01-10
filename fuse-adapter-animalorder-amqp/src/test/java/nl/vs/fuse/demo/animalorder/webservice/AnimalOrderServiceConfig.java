@@ -14,7 +14,7 @@ public class AnimalOrderServiceConfig {
 	String animalOrderSvcServiceNameSpaceWsdlUrl = "wsdl/AnimalOrderService.wsdl";
 	
 
-	@Value("${aoSvc.soap.endpoint}")
+	@Value("${aoSvc.mock.remote.soap.endpoint}")
 	String animalOrderSvcEndpoint;
 
 	String animalOrderSvcServiceNameSpace = "http://xmlns.vs.nl/fuse/demo/wsdl/AnimalOrders";

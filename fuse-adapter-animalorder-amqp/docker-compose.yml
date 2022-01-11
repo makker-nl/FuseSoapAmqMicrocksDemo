@@ -48,7 +48,7 @@ services:
       - "8085:8080"
 
 #### Adapter fuse-adapter-animalorder-amqp:
-  max-adapter-activity-max:
+  fuse-adapter-animalorder-amqp:
     container_name: fuse_adapter_animalorder_amqp
     build:
       context: .

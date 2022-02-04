@@ -1,3 +1,6 @@
+# FuseSoapAmqMicrocksDemo
+This service is part of the *FuseSoapAmqMicrocksDemo*. Read more on the context in the corresponding [README.md](../README.md).
+
 # AnimalOrder SOAP adapter
 
 This example projects exposes a SOAP Service. A received request is posted on an AMQ endpont. This can be an AMQ Artemis Broker address directly or through an Red Hat Interconnect/Apache QPid Router network. 

@@ -1,5 +1,5 @@
 # FuseSoapAmqMicrocksDemo
-Demo with Fuse, AMQ and Microcks using Docker Compose
+Demo with Fuse, AMQ and Microcks using Docker Compose.
 
 # Generate Fuse Skeleton Project
 
@@ -16,6 +16,9 @@ Generate a Fuse 7.10 Spring Boot skeleton project, using maven Arche type:
       -Dpackage=nl.vs.fuse.demo
 
 # Adapter Projects
+The sub-projects in this within this repository implement the following integration:
+<image src="images/SOAP-PubSub-SOAP.png"/>
+
 ## Fuse adapter AnimalOrder SOAP
 The project [fuse-adapter-animalorder-soap](fuse-adapter-animalorder-soap/README.md) provides a SOAP service that publishes the request to an AMQ broker.
 

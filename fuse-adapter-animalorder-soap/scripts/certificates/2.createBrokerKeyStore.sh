@@ -5,7 +5,7 @@
 # Create a key store for the Broker based on settings in the keystore_env.sh
 #
 # author: Martien van den Akker
-# (C) november 2021
+# (C) November 2021
 # VirtualSciences | Conclusion
 ###################################################################################################
 SCRIPTPATH=$(dirname $0)

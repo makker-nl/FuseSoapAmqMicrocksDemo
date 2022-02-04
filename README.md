@@ -21,4 +21,4 @@ The sub-projects in this within this repository implement the following integrat
 
 ## Fuse adapter AnimalOrder SOAP
 The project [fuse-adapter-animalorder-soap](fuse-adapter-animalorder-soap/README.md) provides a SOAP service that publishes the request to an AMQ broker.
-
+The project [fuse-adapter-animalorder-amqp](fuse-adapter-animalorder-amqp/README.md) provides an AMQP service that publishes the request to a SOAP Service.

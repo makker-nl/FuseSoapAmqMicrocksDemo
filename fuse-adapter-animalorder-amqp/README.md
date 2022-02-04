@@ -1,3 +1,6 @@
+# FuseSoapAmqMicrocksDemo
+This service is part of the *FuseSoapAmqMicrocksDemo*. Read more on the context in the corresponding [README.md](../README.md).
+
 # AnimalOrder AMQP adapter
 
 This example project listens to an AMQP address. This can be an AMQ Artemis Broker address directly or through an Red Hat Interconnect/Apache QPid Router network. 

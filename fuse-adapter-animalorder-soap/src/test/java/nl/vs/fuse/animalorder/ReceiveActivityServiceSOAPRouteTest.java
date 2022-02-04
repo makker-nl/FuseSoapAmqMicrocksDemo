@@ -51,8 +51,9 @@ public class ReceiveActivityServiceSOAPRouteTest {
 	String amqpServiceAddress;
 
 	@BeforeClass
-	/** 
+	/**
 	 * Start an embedded broker service.
+	 * 
 	 * @throws Exception
 	 */
 	public static void setUpClass() throws Exception {
@@ -64,9 +65,11 @@ public class ReceiveActivityServiceSOAPRouteTest {
 	}
 
 	@Before
-	/** 
-	 * Add a route that sends a message to the SOAP Endpoint.
-	 * Also add a route to consume messages from the Embedded Broker Service to be able to validate the message contents. 
+	/**
+	 * Add a route that sends a message to the SOAP Endpoint. Also add a route to
+	 * consume messages from the Embedded Broker Service to be able to validate the
+	 * message contents.
+	 * 
 	 * @throws Exception
 	 */
 	public void setUp() throws Exception {
@@ -99,8 +102,10 @@ public class ReceiveActivityServiceSOAPRouteTest {
 
 	@After
 	/**
-	 * Stopping context after each test, will prevent the routes running when the embedded broker is stopped in the tearDownClass() method.
-	 * In the setUp() method, the context is started with each new testcase.
+	 * Stopping context after each test, will prevent the routes running when the
+	 * embedded broker is stopped in the tearDownClass() method. In the setUp()
+	 * method, the context is started with each new testcase.
+	 * 
 	 * @throws Exception
 	 */
 	public void tearDown() throws Exception {
@@ -112,7 +117,8 @@ public class ReceiveActivityServiceSOAPRouteTest {
 
 	@AfterClass
 	/**
-	 *  Stop the embedded broker service 
+	 * Stop the embedded broker service
+	 * 
 	 * @throws Exception
 	 */
 	public static void tearDownClass() throws Exception {

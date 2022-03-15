@@ -1,0 +1,122 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: max-adapter-activity-ros
+  namespace: ns-cci-poc-obis-brokers
+  labels:
+    app: max-adapter-activity-ros
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: max-adapter-activity-ros
+  template:
+    metadata:
+      labels:
+        deployment: max-adapter-activity-ros
+#        metrics: prometheus-rhfuse-adapter
+    spec:
+      volumes:
+        - name: keystore-cert
+          secret:
+            secretName: max-adapter-activity-ros-tls-cert
+            defaultMode: 420
+      containers:
+        - resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: max-adapter-activity-ros
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: AMQP_REMOTEURI
+              value: 'amqp://max-broker-ss-0:5672'
+            - name: AMQP_SERVICE_ADDRESS
+              value: 'topic:pubsub.max.roosters'
+            - name: AMQP_USERNAME
+              value: mr-miyagi
+            - name: LOGGING_LEVEL_NL_NS_HIP_MAX
+              value: DEBUG
+            - name: SERVER_PORT
+              value: '8443'
+            - name: SERVER_SSL_CLIENT-AUTH
+              value: none
+            - name: SERVER_SSL_ENABLED
+              value: 'true'
+            - name: AMQP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: max-adapter-activity-max-amq-broker-secret
+                  key: password
+            - name: KEYSTORE
+              value: /etc/keystore-cert/keystore.ks
+            - name: KEYSTORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: max-adapter-activity-ros-tls-cert
+                  key: keyStorePassword
+            - name: TRUSTSTORE
+              value: /etc/keystore-cert/truststore.ts
+            - name: TRUSTSTORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: max-adapter-activity-ros-tls-cert
+                  key: trustStorePassword
+          ports:
+            - name: metrics
+              containerPort: 8081
+              protocol: TCP
+            - name: https-ros
+              containerPort: 8443
+              protocol: TCP
+          imagePullPolicy: Always
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 30
+          volumeMounts:
+            - name: keystore-cert
+              readOnly: true
+              mountPath: /etc/keystore-cert/
+          terminationMessagePolicy: File
+          image: >-
+            hipdevcontainerregistry001.azurecr.io/max/adapter-activity-ros:20220105.4
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

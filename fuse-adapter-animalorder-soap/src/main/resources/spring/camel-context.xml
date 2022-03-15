@@ -7,16 +7,15 @@
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <route id="receiveAnimalOrderServiceSOAPRoute">
             <from id="receiveAnimalOrder" uri="cxf:bean:animalOrderSOAPEndpoint"/>
-            <log id="logIncomingMsg" logName="nl.vs.fuse.demo"
-                loggingLevel="DEBUG" message="AnimalOrder Request message received: \n ${body}"/>
-            <log id="logRemoteURI" logName="nl.vs.fuse.demo"
-                loggingLevel="DEBUG" message="Try to connect to amqp server using connection {{amqp.remoteURI}}.\nSend message to {{amqp.service.address}}."/>
+            <bean id="log-HIP-Start" method="logStart" ref="FuseLogger"/>
+            <bean id="logRemoteURI"
+                method="logCode(&quot;HIP-990&quot;,&quot;Try to connect to amqp server using connection {{amqp.remoteURI}}.\nSend message to {{amqp.service.address}}.&quot;)" ref="FuseLogger"/>
+            <removeHeaders id="removeHipHeadersPreAMQP" pattern="HIP-*"/>
             <to id="toAMQEndpoint" pattern="InOnly" uri="amqp:{{amqp.service.address}}"/>
-            <log id="logOutput" logName="nl.vs.fuse.demo"
-                loggingLevel="DEBUG" message="AnimalOrder request message sent to AMQPS endpoint: \n${body}"/>
+            <bean id="log-HIP-041"
+                method="logCode(&quot;HIP-041&quot;, {{amqp.remoteURI}})" ref="FuseLogger"/>
             <to id="toAnimalOrderRequest2Response" uri="xslt:transformations/AnimalOrderRequestToAnimalOrderResponse.xsl?output=DOM"/>
-            <log id="logOutgoingMsg" logName="nl.vs.fuse.demo"
-                loggingLevel="DEBUG" message="AnimalOrder Response message responded: \n ${body}"/>
+            <bean id="log-HIP-End" method="logEnd" ref="FuseLogger"/>
         </route>
     </camelContext>
 </beans>

@@ -1,0 +1,16 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ${DEPL_NAME}     
+  namespace: ${NS}
+spec:
+  to:
+    kind: Service
+    name: ${DEPL_NAME}
+    weight: 100
+  port:
+    targetPort: https-ros
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None

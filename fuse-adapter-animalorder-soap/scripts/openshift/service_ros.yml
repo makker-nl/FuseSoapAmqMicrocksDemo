@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${DEPL_NAME}     
+  namespace: ${NS}
+spec:
+  selector:                  
+    deployment: ${DEPL_NAME}   
+  ports:
+  - name: https-ros
+    port: 8443               
+    protocol: TCP
+    targetPort: 8443  

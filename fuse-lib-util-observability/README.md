@@ -1,0 +1,2 @@
+Deze library voorziet componenten die gebruikt kunnen worden voor het configureren van observeerbaarheid (monitoring).
+De documentatie staat op de Wiki: https://dev.azure.com/ns-topaas/CORTEX/_wiki/wikis/CORTEX.wiki/5506/cci-lib-util-observability

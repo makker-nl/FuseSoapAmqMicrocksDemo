@@ -7,10 +7,7 @@
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <route id="receiveAnimalOrderAMQPRoute">
             <from id="receiveAnimalOrder" uri="amqp:{{amqp.service.address}}"/>
- <bean id="log-HIP-Start" method="logStart" ref="FuseLogger"/>
-
-
-
+            <bean id="log-HIP-Start" method="logStart" ref="FuseLogger"/>
             <setHeader headerName="operationName" id="setOperationName">
                 <constant>order</constant>
             </setHeader>
@@ -20,12 +17,10 @@
             <setHeader headerName="SOAPAction" id="setSOAPAction">
                 <constant/>
             </setHeader>
-
             <bean id="logRemoteURI"
                 method="logCode(&quot;HIP-990&quot;,&quot;Invoke Remote AnimalOrder service with request message: \n ${body}&quot;)" ref="FuseLogger"/>
-
             <to id="invokeAnimalOrderSvc" uri="cxf:bean:animalOrderSOAPEndpoint"/>
- <bean id="log-HIP-End" method="logEnd" ref="FuseLogger"/>
+            <bean id="log-HIP-End" method="logEnd" ref="FuseLogger"/>
         </route>
     </camelContext>
 </beans>

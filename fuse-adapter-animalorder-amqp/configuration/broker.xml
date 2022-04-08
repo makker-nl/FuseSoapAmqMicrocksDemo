@@ -7,7 +7,7 @@
 	<core xmlns="urn:activemq:core"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="urn:activemq:core ">
-		<name>amqp-broker-producer</name>
+		<name>fuse-amqp-broker</name>
 
 		<persistence-enabled>true</persistence-enabled>
 		<security-enabled>false</security-enabled>
@@ -94,7 +94,7 @@
 		</address-settings>
 
 		<addresses>
-			<address name="telemetry.cortex.train.window">
+			<address name="fuse.animalorder.demo">
 				<multicast>
 					<!-- <queue name="Test-client.Test-subscription-1" max-consumers="1"> 
 						<durable>true</durable> </queue> <queue name="Test-client.Test-subscription-2" 
@@ -102,9 +102,6 @@
 				</multicast>
 			</address>
 		</addresses>
-		<!-- <broker-connections> <amqp-connection uri="tcp://edge-publisher:5672" 
-			name="my-router"> <peer address-match="telemetry.#"/> </amqp-connection> 
-			</broker-connections> -->
 	</core>
 
 </configuration>

@@ -1,0 +1,121 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fuse-adapter-animalorder-soap
+  namespace: fuse-microcks-demo
+  labels:
+    app: fuse-adapter-animalorder-soap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: fuse-adapter-animalorder-soap
+  template:
+    metadata:
+      labels:
+        deployment: fuse-adapter-animalorder-soap
+    spec:
+      containers:     
+        - name: fuse-adapter-animalorder-soap
+          image: >-
+            default-route-openshift-image-registry.apps.test-cluster.vs-cloud.nl/fuse-microcks-demo/fuse-adapter-animalorder-soap:1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 30
+          ports:
+            - name: metrics
+              containerPort: 8081
+              protocol: TCP
+            - name: https-ros
+              containerPort: 8443
+              protocol: TCP
+          env:
+            - name: AMQP_REMOTEURI
+              value: 'amqp://fuse-amq-broker-ss-0:5672'
+            - name: AMQP_SERVICE_ADDRESS
+              value: 'topic:pubsub.max.roosters'
+            - name: AMQP_USERNAME
+              value: mr-miyagi
+            - name: LOGGING_LEVEL_NL_VS_FUSE_DEMO
+              value: DEBUG
+            - name: SERVER_PORT
+              value: '8443'
+            - name: SERVER_SSL_CLIENT-AUTH
+              value: none
+            - name: SERVER_SSL_ENABLED
+              value: 'true'
+            - name: AMQP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fuse-amq-user-secret
+                  key: password
+            - name: KEYSTORE
+              value: /etc/keystore-cert/keystore.ks
+            - name: KEYSTORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fuse-adapter-animalorder-soap-tls-cert
+                  key: keyStorePassword
+            - name: TRUSTSTORE
+              value: /etc/keystore-cert/truststore.ts
+            - name: TRUSTSTORE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fuse-adapter-animalorder-soap-tls-cert
+                  key: trustStorePassword
+          volumeMounts:
+            - name: keystore-cert
+              readOnly: true
+              mountPath: /etc/keystore-cert/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      volumes:
+        - name: keystore-cert
+          secret:
+            secretName: fuse-adapter-animalorder-soap-tls-cert
+            defaultMode: 420
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

@@ -1,0 +1,16 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: fuse-adapter-animalorder-soap     
+  namespace: fuse-microcks-demo
+spec:
+  to:
+    kind: Service
+    name: fuse-adapter-animalorder-soap
+    weight: 100
+  port:
+    targetPort: http-soap
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None

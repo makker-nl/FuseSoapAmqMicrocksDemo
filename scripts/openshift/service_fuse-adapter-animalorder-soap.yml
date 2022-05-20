@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fuse-adapter-animalorder-soap     
+  namespace: fuse-microcks-demo
+spec:
+  selector:                  
+    deployment: fuse-adapter-animalorder-soap   
+  ports:
+  - name: http-soap
+    port: 8443
+    protocol: TCP
+    targetPort: 8443

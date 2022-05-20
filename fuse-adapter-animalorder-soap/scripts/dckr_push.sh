@@ -1,8 +1,8 @@
 #!/bin/bash
 SCRIPTPATH=$(dirname $0)
 BASEDIR=$SCRIPTPATH/..
-NS=fuse-microcks-demo
-IMAGE=fuse-adapter-animalorder-soap
-HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
-docker tag $IMAGE $HOST/$NS/$IMAGE
-docker push $HOST/$NS/$IMAGE
+. $SCRIPTPATH/dckr_env.sh
+echo Tag image as $HOST/$NS/$IMAGE:$MVN_VER
+docker tag $IMAGE $HOST/$NS/$IMAGE:$MVN_VER
+echo push  $HOST/$NS/$IMAGE:$MVN_VER
+docker push $HOST/$NS/$IMAGE:$MVN_VER

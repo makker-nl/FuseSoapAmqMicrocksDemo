@@ -59,12 +59,12 @@ spec:
             - name: metrics
               containerPort: 8081
               protocol: TCP
-            - name: https-ros
+            - name:  http-soap
               containerPort: 8443
               protocol: TCP
           env:
             - name: AMQP_REMOTEURI
-              value: 'amqp://fuse-amq-broker-ss-0:5672'
+              value: 'amqp://fuse-amq-broker-amqp-0-svc:5672'
             - name: AMQP_SERVICE_ADDRESS
               value: 'topic:pubsub.max.roosters'
             - name: AMQP_USERNAME

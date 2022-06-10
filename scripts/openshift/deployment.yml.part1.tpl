@@ -59,6 +59,6 @@ spec:
             - name: metrics
               containerPort: 8081
               protocol: TCP
-            - name: https-ros
-              containerPort: 8443
+            - name:  ${SERVICE_PORT_NAME}
+              containerPort: ${SERVICE_TARGET_PORT}
               protocol: TCP

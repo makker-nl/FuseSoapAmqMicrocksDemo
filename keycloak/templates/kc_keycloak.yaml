@@ -1,0 +1,52 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  labels:
+    app: sso
+  name: keycloak
+  namespace: rhsso
+spec:
+  externalAccess:
+    enabled: true
+    tlsTermination: passthrough
+  instances: 1
+  keycloakDeploymentSpec:
+    experimental:
+      env:
+      - name: KEYCLOAK_KEYSTORE_DIR
+        value: /opt/keycloak/secret
+      - name: KEYCLOAK_KEYSTORE
+        value: keystore.ks
+      - name: KEYCLOAK_KEYSTORE_TYPE
+        value: JKS
+      - name: KEYCLOAK_KEYSTORE_PASSWORD
+        value: 2bf7d8a-very-secret-offcourse-0cfc9c
+      - name: KEYCLOAK_TRUSTSTORE
+        value: truststore.ts
+      - name: KEYCLOAK_KEYSTORE_TYPE
+        value: JKS
+      - name: KEYCLOAK_TRUSTSTORE_DIR
+        value: /opt/keycloak/secret
+      - name: KEYCLOAK_TRUSTSTORE_PASSWORD
+        value: 2bf7d8a-very-secret-offcourse-0cfc9c
+      volumes:
+        items:
+        - items:
+          - key: keystore.ks
+            path: keystore.ks
+          - key: truststore.ts
+            path: truststore.ts
+          mountPath: /opt/keycloak/secret
+          name: eap-keystore-volume
+          secrets:
+          - rhsso-keycloak-tls-cert
+        - configMaps:
+          - keycloak-postconfigure
+          items:
+          - key: postconfigure.sh
+            mode: 511
+            path: postconfigure.sh
+          mountPath: /opt/eap/extensions
+          name: keycloak-postconfigure
+    imagePullPolicy: Always
+  storageClassName: managed-premium

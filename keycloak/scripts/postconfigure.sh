@@ -6,6 +6,7 @@
 # https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/server_installation_and_configuration_guide/network#setting_up_ssl
 # http://www.mastertheboss.com/jbossas/jboss-security/complete-tutorial-for-configuring-ssl-https-on-wildfly/
 
+
 export KEYSTORE_PATH=$KEYCLOAK_KEYSTORE_DIR/$KEYCLOAK_KEYSTORE
 export TRUSTSTORE_PATH=$KEYCLOAK_TRUSTSTORE_DIR/$KEYCLOAK_TRUSTSTORE
 
@@ -18,14 +19,22 @@ $JBOSS_HOME/bin/jboss-cli.sh <<EOF
 
   echo Start embedded server: 
   embed-server --std-out=echo --server-config=standalone-openshift.xml  
-
-  echo Reconfigure keystore in ApplicationRalm with: $KEYSTORE_PATH
-  /core-service=management/security-realm=ApplicationRealm/server-identity=ssl:write-attribute(name=keystore-path, value=$KEYSTORE_PATH)
-  /core-service=management/security-realm=ApplicationRealm/server-identity=ssl:write-attribute(name=keystore-password, value=$KEYCLOAK_KEYSTORE_PASSWORD)
+  
+  echo "Add Security Realm UndertowCustomHTTPs"
+  /core-service=management/security-realm=UndertowCustomHTTPs:add()
+  /core-service=management/security-realm=UndertowCustomHTTPs/server-identity=ssl:add()
+  /core-service=management/security-realm=UndertowCustomHTTPs/server-identity=ssl:write-attribute(name=keystore-path, value=$KEYSTORE_PATH)
+  /core-service=management/security-realm=UndertowCustomHTTPs/server-identity=ssl:write-attribute(name=keystore-password, value=$KEYCLOAK_KEYSTORE_PASSWORD)
+    
+  echo "Add Socket Binding with port 8843."  
+  /socket-binding-group=standard-sockets/socket-binding="https-custom":add(interface="bindall" , port=8843)
+  
+  echo "Add https-listener https-custom."
+  /subsystem=undertow/server=default-server/https-listener=https-custom:add(socket-binding="https-custom", security-realm="UndertowCustomHTTPs" )  
   
   echo Reconfigure truststore in Keycloak server with: $TRUSTSTORE_PATH
   /subsystem=keycloak-server/spi=truststore/provider=file:write-attribute(name=properties, value={"file" => "$TRUSTSTORE_PATH","password" => "$KEYCLOAK_TRUSTSTORE_PASSWORD","hostname-verification-policy" => "WILDCARD","disabled" => "false"})
-
+  
   stop-embedded-server
 
   exit
